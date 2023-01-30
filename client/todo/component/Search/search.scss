@@ -1,0 +1,34 @@
+.searchWrapper{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    .search{
+        max-width: 90rem;
+        min-width: 15rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        top:4rem;
+        width: 60%;
+        height: 3rem;
+        border: 2px white solid;
+        border-radius: 3rem;
+
+        img{
+            height: auto;
+            width: 30px;
+            margin-left: 11px;
+        }
+        input{
+            background-color: unset;
+            border: none;
+            width: 95%;
+            height: 80%;
+            font-size: x-large;
+            font-family: inherit;
+            padding-left: 1rem;
+        }:focus-visible{
+            outline: none;
+        }
+    }
+}

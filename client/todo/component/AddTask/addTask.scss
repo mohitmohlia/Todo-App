@@ -1,0 +1,31 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 80%;
+    label{
+        font-size: 0.8rem;
+        margin:0.5rem;
+        margin-top: 2rem;
+    }
+    input{
+        background-color: unset;
+        border: none;
+        font-size: x-large;
+        font-family: inherit;
+    }:focus-visible{
+        outline: none;
+    }
+    button{
+        margin-top: 7rem;
+        margin-right: 2rem;
+        margin-bottom: 2rem;
+        margin-left: 2rem;
+    }
+    .checkbox{
+        margin-right: auto;
+        margin-left: 1rem;
+        transform: scale(2.5);
+        margin-top: 1rem;
+    }
+}
