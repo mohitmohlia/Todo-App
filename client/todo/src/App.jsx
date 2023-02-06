@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { create, update } from '../api';
-import AddTask from '../component/AddTask';
-import Modal from '../component/Modal'
-import Todo from '../component/Todo'
+import { useEffect, useState } from 'react'
+import { create, update } from './api';
+import AddTask from './component/AddTask';
+import Modal from './component/Modal'
+import Todo from './component/Todo'
 import './App.scss'
 
 function App() {
@@ -43,6 +43,12 @@ function App() {
     }
   }
 
+
+  useEffect(()=>{
+    console.log('Todo mounted');
+    return ()=>console.log('Todo unmounted')
+  })
+  
   return (
     <div className="App">
       <Todo onOpen={()=>setShowModal(true)} onTaskClick={onTaskClick}/>

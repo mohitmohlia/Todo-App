@@ -1,9 +1,12 @@
 import crypto from 'crypto'
+
 import { addTimeStamp } from '../lib/util.js';
 
 import {db} from '../models/index.js'
 
 const Task = db.task
+
+const Op = db.Sequelize.Op;
 
 const create = async (req,res)=>{
     try{
@@ -81,7 +84,22 @@ const destroy = async (req, res) => {
 
 const findAll = async (req,res)=>{
     try{
-        const data = await Task.findAll();
+        const searchText = req.query.search;
+
+        const condition = searchText ?
+         {
+            text: {
+                [Op.iLike]: `%${searchText}%`
+            }
+        } 
+        : null;
+
+        console.log(condition);
+
+        const data = await Task.findAll({where:condition});
+        
+        console.log(searchText);
+        console.log(data);
         if(data){
             res.status(201).send(data);
         }else{

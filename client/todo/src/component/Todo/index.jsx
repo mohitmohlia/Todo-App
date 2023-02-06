@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react'
-import './todo.scss'
+import React, { useState, useEffect } from 'react'
 import { fetch } from '../../api';
 import Search from '../Search';
 import List from '../List'
+import './todo.scss'
 
 const Todo = ({onOpen,onTaskClick}) =>{
     const [tasks,setTask] = useState(null);
     const [loading,setLoading] = useState(false);
+    const [searchText,setSearchText]=useState('');
+
     const fetchTasks = async(url,cb) =>{
         try{
             setLoading(true);
@@ -20,10 +22,17 @@ const Todo = ({onOpen,onTaskClick}) =>{
     }
 
     useEffect(()=>{
-        if(!tasks){
-            fetchTasks('/task',setTask)
+        fetchTasks(`/task`,setTask);
+    },[]);
+
+    useEffect(()=>{
+        if(searchText){
+            fetchTasks(`/task?search=${searchText}`,setTask);    
+        }else if(!searchText){
+            fetchTasks(`/task`,setTask);
         }
-    },[tasks]);
+    },[searchText]);
+
 
     if(loading){
         return (
@@ -32,11 +41,12 @@ const Todo = ({onOpen,onTaskClick}) =>{
             </div>
         );
     }
+
     if(tasks){
         return (
             <div className='todo'>
-                <Search/>
-                 <div className='addTask'><button onClick={onOpen}>Add Task</button></div>
+                <Search searchText={searchText} setSearchText={setSearchText}/>
+                <div className='addTask'><button onClick={onOpen}>Add Task</button></div>
                 <List tasks={tasks} onTaskClick={onTaskClick}/> 
             </div>
         )

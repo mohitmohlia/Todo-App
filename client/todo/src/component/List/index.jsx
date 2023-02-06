@@ -1,8 +1,10 @@
 import { destroy } from '../../api';
-import deleteImg from '../../public/delete.png';
+import deleteImg from '/delete.png';
 import './list.scss'
+import { useEffect } from 'react';
 
 const List = ({tasks,onTaskClick}) =>{
+
     const handleDelete=async(e,id)=>{
         try{
             e.stopPropagation();
@@ -10,14 +12,13 @@ const List = ({tasks,onTaskClick}) =>{
         }catch(err){
             console.log(err);
         }finally{
-            window.location.reload();
+           window.location.reload();
         }
     }
 
     const handleTaskClick =(task)=>{
         onTaskClick(task);
     }
-
     
     return (
         <table className="tasks">
